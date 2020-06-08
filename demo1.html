@@ -1,0 +1,83 @@
+<!DOCTYPE html> 
+<title>Sobel operation</title> 
+<script src=jquery.min.js></script> 
+<script> 
+document.addEventListener('DOMContentLoaded', function(){
+	var v = document.getElementById('v');
+	var canvas = document.getElementById('c');
+	var context = canvas.getContext('2d');
+ 
+	var cw = Math.floor(canvas.clientWidth / 100);
+	var ch = Math.floor(canvas.clientHeight / 100);
+	canvas.width = cw;
+	canvas.height = ch;
+ 
+	v.addEventListener('play', function(){
+		draw(this,context,cw,ch);
+	},false);
+ 
+},false);
+ 
+function draw(v,c,w,h) {
+	if(v.paused || v.ended)	return false;
+	c.drawImage(v,0,0,w,h);
+	setTimeout(draw,20,v,c,w,h);
+}
+
+function changeVid(url){
+		var video = document.getElementById('v');
+		video.src=url;
+		var source = document.createElement('source');
+		source.setAttribute('src', url);
+		video.appendChild(source);
+	}
+	var f = document.getElementById('input');
+	f.addEventListener("change", function () {
+		alert("sds");
+  		changeVid(window.URL.createObjectURL(this.files[0]));
+});
+</script> 
+ 
+<div id="container">
+	<canvas id=c></canvas> 
+	<video id=v controls loop class="myvideo"> 
+	</video> 
+	<input type="file" id=input accept="video/*"/>
+</div>
+
+
+
+<style> 
+body {
+	background: black;
+}
+#c {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 50%;
+	height: 50%;
+}
+ 
+#v {
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	height: 50%;
+}
+
+div{
+	display: flex;
+	width: auto;
+	height: auto;
+	align-self: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+ 
+p {
+	position: relative;
+	z-index: 1;
+}
+</style> 

@@ -1,6 +1,7 @@
 <!DOCTYPE html> 
 <title>Sobel operation</title> 
 <script src=jquery.min.js></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script> 
 document.addEventListener('DOMContentLoaded', function(){
 	var v = document.getElementById('v');
@@ -24,26 +25,19 @@ function draw(v,c,w,h) {
 	setTimeout(draw,20,v,c,w,h);
 }
 
-function changeVid(url){
-		var video = document.getElementById('v');
-		video.src=url;
-		var source = document.createElement('source');
-		source.setAttribute('src', url);
-		video.appendChild(source);
-	}
-	var f = document.getElementById('input');
-	f.addEventListener("change", function () {
-		alert("sds");
-  		changeVid(window.URL.createObjectURL(this.files[0]));
+$(document).on("change", ".file_multi_video", function(evt) {
+  var $source = $('#video_here');
+  $source[0].src = URL.createObjectURL(this.files[0]);
+  $source.parent()[0].load();
 });
 </script> 
  
-<div id="container">
-	<canvas id=c></canvas> 
-	<video id=v controls loop class="myvideo"> 
-	</video> 
-	<input type="file" id=input accept="video/*"/>
-</div>
+<canvas id=c></canvas> 
+<video id=v controls loop class="myvideo">
+	<source src="mov_bbb.mp4" id="video_here">
+		Your browser does not support HTML5 video. 
+</video> 
+<input type="file" name="file[]" id=input class="file_multi_video" accept="video/*">
 
 
 
@@ -52,28 +46,28 @@ body {
 	background: black;
 }
 #c {
+	position:absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	width: 50%;
-	height: 50%;
+	width: 500px;
+	height: 320px;
 }
  
 #v {
-	top: 50%;
-	left: 50%;
-	width: 50%;
-	height: 50%;
+	position:absolute;
+	top: 0;
+	bottom: 0;
+	left: 520px;
+	right: 0;
+	width: 500px;
+	height: 320px;
 }
-
-div{
-	display: flex;
-	width: auto;
-	height: auto;
-	align-self: center;
-	flex-direction: row;
-	flex-wrap: wrap;
+ 
+#input {
+	position:absolute;
+	top: 400px;
 }
  
 p {

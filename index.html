@@ -38,7 +38,7 @@
   //   waxSigningURL: 'http://all-access.wax.test:8113',
   //   waxAutoSigningURL: 'http://idm.wax.test:8113/v1/accounts/auto-accept/'
   // });
-
+  document.getElementById('response').append(document.cookie);
   async function login() {
     try {
       const userAccount = await wax.login();
